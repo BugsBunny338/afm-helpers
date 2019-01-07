@@ -89,8 +89,7 @@ expect(
 ```javascript
 expect(
   AFMBuilder
-    .measure('abcdefghi')
-    .localIdentifier('myLocalIdentifier')
+    .measure('abcdefghi', { localIdentifier: 'myLocalIdentifier' })
 ).toEqual(
   {
     execution: {
@@ -116,8 +115,7 @@ expect(
 ```javascript
 expect(
   AFMBuilder
-    .measure('abcdefghi')
-    .alias('My Measure')
+    .measure('abcdefghi', { alias: 'My Measure' })
 ).toEqual(
   {
     execution: {
@@ -144,8 +142,7 @@ expect(
 ```javascript
 expect(
   AFMBuilder
-    .measure('abcdefghi')
-    .format('#,##0.00')
+    .measure('abcdefghi', { format: '#,##0.00' })
 ).toEqual(
   {
     execution: {
@@ -172,12 +169,8 @@ expect(
 ```javascript
 expect(
   AFMBuilder
-    .measure('abcdefghi')
-    .alias('My First Measure')
-    .format('0.00')
-    .measure('/gdc/md/abcd/obj/123')
-    .format('#,##')
-    .alias('My Other Measure')
+    .measure('abcdefghi', { alias: 'My First Measure', format: '0.00' })
+    .measure('/gdc/md/abcd/obj/123', { alias: 'My Other Measure', format: '#,##' })
 ).toEqual(
   {
     execution: {
@@ -225,7 +218,7 @@ const measures = [{
 const afm = AFMBuilder();
 
 measures.forEach(measure => {
-  afm.measure(measure.uri).alias(measure.alias);
+  afm.measure(measure.uri, { alias: measure.alias });
 });
 
 expect(afm).toEqual(
